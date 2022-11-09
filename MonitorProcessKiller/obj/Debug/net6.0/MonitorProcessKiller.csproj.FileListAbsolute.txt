@@ -1,0 +1,15 @@
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\bin\Debug\net6.0\MonitorProcessKiller.exe
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\bin\Debug\net6.0\MonitorProcessKiller.deps.json
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\bin\Debug\net6.0\MonitorProcessKiller.runtimeconfig.json
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\bin\Debug\net6.0\MonitorProcessKiller.dll
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\bin\Debug\net6.0\MonitorProcessKiller.pdb
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\MonitorProcessKiller.csproj.AssemblyReference.cache
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\MonitorProcessKiller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\MonitorProcessKiller.AssemblyInfoInputs.cache
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\MonitorProcessKiller.AssemblyInfo.cs
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\MonitorProcessKiller.csproj.CoreCompileInputs.cache
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\MonitorProcessKiller.dll
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\refint\MonitorProcessKiller.dll
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\MonitorProcessKiller.pdb
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\MonitorProcessKiller.genruntimeconfig.cache
+C:\Users\phanq\source\repos\MonitorProcessKiller\MonitorProcessKiller\obj\Debug\net6.0\ref\MonitorProcessKiller.dll
