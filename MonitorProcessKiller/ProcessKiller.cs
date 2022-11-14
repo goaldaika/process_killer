@@ -8,34 +8,44 @@ using System.Xml;
 
 namespace MonitorProcessKiller
 {
-    internal class ProcessKiller
+    public class ProcessKiller
     {
         public string ProcessName { get; set; }
         public int MaximumLifeTime { get; set; }
         public int Frequency { get; set; }
+        private TimeSpan LifeTime { get; set; }
         public ProcessKiller(string name, int maximumLifeTime, int frequency)
         {
             this.ProcessName = name;
             this.MaximumLifeTime = maximumLifeTime;
             this.Frequency = frequency;
         }
-        public bool KillProcess()
+        public bool Monitoring()
         {
-            TimeSpan lifeTime = default;
-
-            foreach (var process in Process.GetProcessesByName(ProcessName))
+            return KillProcess();
+        }
+        private bool KillProcess()
+        {
+            if (!string.IsNullOrWhiteSpace(ProcessName))
             {
-                lifeTime = DateTime.Now - process.StartTime;
-                if (lifeTime.TotalMinutes >= MaximumLifeTime)
+                foreach (var process in Process.GetProcessesByName(ProcessName))
                 {
-                    process.Kill();
-                    WriteLog();
+                    LifeTime = DateTime.Now - process.StartTime;
+                    if (LifeTime.TotalMinutes >= MaximumLifeTime)
+                    {
+
+                        WriteLog();
+                        process.Kill();
+                        Console.WriteLine("Process " + process.ProcessName + " has run for " + LifeTime.TotalMinutes.ToString("0.00") +
+                            " minutes, which is exceeded the allowed run time is "
+                            + MaximumLifeTime + " minutes, process terminated !");
+                        return true;
+                    }
                 }
             }
-
-            return true;
+            return false;
         }
-        public bool WriteLog()
+        public void WriteLog()
         {
             if (File.Exists("ProcessKilled.xml"))
             {
@@ -50,22 +60,28 @@ namespace MonitorProcessKiller
                 XmlAttribute nameAttr = processedData.CreateAttribute("Name");
                 nameAttr.Value = ProcessName;
                 processNode.Attributes.Append(nameAttr);
-
                 
                 foreach(var process in Process.GetProcessesByName(ProcessName))
                 {
+                    LifeTime = DateTime.Now - process.StartTime;
+
                     XmlNode startTimeNode = processedData.CreateElement("StartTime");
+                    XmlNode runTime = processedData.CreateElement("RunTime");
+                    
                     startTimeNode.AppendChild(processedData.CreateTextNode(process.StartTime.ToString()));
+                    runTime.AppendChild(processedData.CreateTextNode(LifeTime.ToString()));
                     processNode.AppendChild(startTimeNode);
+                    processNode.AppendChild(runTime);
                 }
                 
-
                 XmlNode killedTimeNode = processedData.CreateElement("KilledTime");
                 killedTimeNode.AppendChild(processedData.CreateTextNode(DateTime.Now.ToString()));
                 processNode.AppendChild(killedTimeNode);
 
+                
 
                 processedData.Save("ProcessKilled.xml");
+
             }
             else
             {
@@ -74,6 +90,7 @@ namespace MonitorProcessKiller
 
                 XmlNode root = processedData.CreateElement("Root");
                 processedData.AppendChild(root);
+
                 XmlNode processNode = processedData.CreateElement("Process");
                 root.AppendChild(processNode);
 
@@ -84,11 +101,16 @@ namespace MonitorProcessKiller
                 
                 foreach (var process in Process.GetProcessesByName(ProcessName))
                 {
-                    XmlNode startTimeNode = processedData.CreateElement("StartTime");
-                    startTimeNode.AppendChild(processedData.CreateTextNode(process.StartTime.ToString()));
-                    processNode.AppendChild(startTimeNode);
-                }
+                    LifeTime = DateTime.Now - process.StartTime;
 
+                    XmlNode startTimeNode = processedData.CreateElement("StartTime");
+                    XmlNode runTime = processedData.CreateElement("RunTime");
+
+                    startTimeNode.AppendChild(processedData.CreateTextNode(process.StartTime.ToString()));
+                    runTime.AppendChild(processedData.CreateTextNode(LifeTime.ToString()));
+                    processNode.AppendChild(startTimeNode);
+                    processNode.AppendChild(runTime);
+                }
 
                 XmlNode killedTimeNode = processedData.CreateElement("KilledTime");
                 killedTimeNode.AppendChild(processedData.CreateTextNode(DateTime.Now.ToString()));
@@ -96,9 +118,8 @@ namespace MonitorProcessKiller
 
                 processedData.Save("ProcessKilled.xml");
 
-
             }
-            return true;
+            
         }
     }
 }
